@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tech For Girls</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Left: Image/Visual (casual style) -->
+    <div class="left-panel">
+      <div class="circle-third"></div>
+        <p class="subtitle">
+          <span>✨</span> Create your account and <br>
+          take your first step into <span class="accent">tech!</span> <span>🚀</span>
+        </p>
+      <img src="assets/girls.jpg" alt="Girl with Laptop" class="illustration"/>
+      
+    </div>
+
+    <!-- Right: Registration Form -->
+    <div class="right-panel">
+      <h1>Join <span>Tech For Girls</span></h1>
+
+      <form id="registrationForm">
+        <!-- Basic Details -->
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" placeholder="Enter your full name" required />
+
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required />
+
+        <label for="email">Email ID</label>
+        <input type="email" id="email" name="email" placeholder="yourmail@example.com" required />
+
+        <label for="college">College / Department</label>
+        <input type="text" id="college" name="college" placeholder="Enter your college name or department" required />
+
+        <!-- WhatsApp Share Button & Counter -->
+        <div class="share-section">
+          <button type="button" id="whatsappShareBtn">
+            🔗 Share on WhatsApp
+          </button>
+          <p id="shareCounter">Click count: 0/5</p>
+          <p id="shareMessage" class="hidden">Sharing complete. Please continue.</p>
+        </div>
+
+        <!-- File Upload -->
+        <label for="screenshot">Upload Screenshot (Resume, Photo, etc.)</label>
+        <input type="file" id="screenshot" name="screenshot" accept="image/*,.pdf" required />
+
+        <!-- Submit Button -->
+        <button type="submit" id="submitBtn">🎯 Submit Registration</button>
+
+        <!-- Success Message -->
+        <p id="successMessage" class="hidden">🎉 Your submission has been recorded. Thanks for being part of Tech for Girls!</p>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
