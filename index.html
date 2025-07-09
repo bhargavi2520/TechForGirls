@@ -11,18 +11,17 @@
     <!-- Left: Image/Visual (casual style) -->
     <div class="left-panel">
       <div class="circle-third"></div>
-        <p class="subtitle">
-          <span>✨</span> Create your account and <br>
-          take your first step into <span class="accent">tech!</span> <span>🚀</span>
-        </p>
-      <img src="assets/girls.jpg" alt="Girl with Laptop" class="illustration"/>
-      
+      <img src="assets/girls.jpg" alt="Girls with Laptop" class="illustration"/>
+      <!-- Place this inside .left-panel -->
+      <div class="bottom-right-circle"></div>
     </div>
 
     <!-- Right: Registration Form -->
     <div class="right-panel">
+        <p class="subtitle">
+          Create your account and take first step into <span class="accent">Tech!</span> <span>🚀</span>
+     </p>
       <h1>Join <span>Tech For Girls</span></h1>
-
       <form id="registrationForm">
         <!-- Basic Details -->
         <label for="name">Full Name</label>
@@ -49,12 +48,10 @@
         <!-- File Upload -->
         <label for="screenshot">Upload Screenshot (Resume, Photo, etc.)</label>
         <input type="file" id="screenshot" name="screenshot" accept="image/*,.pdf" required />
-
-        <!-- Submit Button -->
-        <button type="submit" id="submitBtn">🎯 Submit Registration</button>
-
         <!-- Success Message -->
         <p id="successMessage" class="hidden">🎉 Your submission has been recorded. Thanks for being part of Tech for Girls!</p>
+        <!-- Submit Button -->
+        <button type="submit" id="submitBtn">🎯 Submit Registration</button>
       </form>
     </div>
   </div>
