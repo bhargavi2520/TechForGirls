@@ -42,7 +42,6 @@ form.addEventListener('submit', async (e) => {
     return;
   }
 
-  // Get form data
   const name = document.getElementById('name').value.trim();
   const phone = document.getElementById('phone').value.trim();
   const email = document.getElementById('email').value.trim();
@@ -55,42 +54,39 @@ form.addEventListener('submit', async (e) => {
   }
 
   const file = fileInput.files[0];
-
-  // Upload file to a cloud (e.g. Imgur, Firebase, or temporary image host)
-  // For now, let's assume we simulate this with a base64 string.
   const fileBase64 = await toBase64(file);
 
-  // Send to Google Sheets via Google Apps Script Web App
   try {
-  const formData = new FormData();
-  formData.append("name", name);
-  formData.append("phone", phone);
-  formData.append("email", email);
-  formData.append("college", college);
-  formData.append("screenshot", fileBase64); // Base64 string still works
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("phone", phone);
+    formData.append("email", email);
+    formData.append("college", college);
+    formData.append("screenshot", fileBase64);
 
-  const response = await fetch(
-    "https://script.google.com/macros/s/AKfycbynzfJ6jBAqjKbmmYRCeS8SS4sm3OpZneiOCMTUV55y-kFyQBJlGpivp9tK4I8n0eiQLg/exec",
-    {
-      method: "POST",
-      body: formData,
+    const response = await fetch(
+      "https://script.google.com/macros/s/AKfycbxJ4z4GxAvSz1aLrDaLnccozafxjb005FC0oGzQaIS6nFNJ-NErp5jOwWscw7Quk29PUA/exec",
+      {
+        method: "POST",
+        body: formData
+      }
+    );
+
+    const resultText = await response.text();  // HTMLService returns text
+    const result = JSON.parse(resultText);     // Parse it to JSON manually
+
+    if (result.success) {
+      localStorage.setItem("techGirlsSubmitted", "true");
+      disableForm();
+      successMessage.classList.remove("hidden");
+    } else {
+      alert("There was an issue submitting your form. Please try again later.");
     }
-  );
 
-  const result = await response.json();
-
-  if (result.success) {
-    localStorage.setItem("techGirlsSubmitted", "true");
-    disableForm();
-    successMessage.classList.remove("hidden");
-  } else {
-    alert("There was an issue submitting your form. Please try again later.");
+  } catch (error) {
+    console.error("Submission error:", error);
+    alert("Submission failed. Please check your internet connection or try again.");
   }
-} catch (error) {
-  console.error("Submission error:", error);
-  alert("Submission failed. Please check your internet connection or try again.");
-}
-
 });
 
 // ======== Helper Functions ========
