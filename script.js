@@ -62,34 +62,35 @@ form.addEventListener('submit', async (e) => {
 
   // Send to Google Sheets via Google Apps Script Web App
   try {
-    const response = await fetch("https://script.google.com/macros/s/AKfycbxcu772XV6PQiwD8TSHw-PnJcEI3vTSpvqG2fQI_j7t25RPwQN7Bq8ohEalxXZ9_98ZZw/exec", {
+  const formData = new FormData();
+  formData.append("name", name);
+  formData.append("phone", phone);
+  formData.append("email", email);
+  formData.append("college", college);
+  formData.append("screenshot", fileBase64); // Base64 string still works
+
+  const response = await fetch(
+    "https://script.google.com/macros/s/AKfycbynzfJ6jBAqjKbmmYRCeS8SS4sm3OpZneiOCMTUV55y-kFyQBJlGpivp9tK4I8n0eiQLg/exec",
+    {
       method: "POST",
-      body: JSON.stringify({
-        name,
-        phone,
-        email,
-        college,
-        screenshot: fileBase64
-      }),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    });
-
-    const result = await response.json();
-
-    if (result.success) {
-      localStorage.setItem("techGirlsSubmitted", "true");
-      disableForm();
-      successMessage.classList.remove("hidden");
-    } else {
-      alert("There was an issue submitting your form. Please try again later.");
+      body: formData,
     }
+  );
 
-  } catch (error) {
-    console.error("Submission error:", error);
-    alert("Submission failed. Please check your internet connection or try again.");
+  const result = await response.json();
+
+  if (result.success) {
+    localStorage.setItem("techGirlsSubmitted", "true");
+    disableForm();
+    successMessage.classList.remove("hidden");
+  } else {
+    alert("There was an issue submitting your form. Please try again later.");
   }
+} catch (error) {
+  console.error("Submission error:", error);
+  alert("Submission failed. Please check your internet connection or try again.");
+}
+
 });
 
 // ======== Helper Functions ========
