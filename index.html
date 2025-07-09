@@ -20,7 +20,7 @@
     <div class="right-panel">
         <p class="subtitle">
           Create your account and take first step into <span class="accent">Tech!</span> <span>🚀</span>
-     </p>
+       </p>
       <h1>Join <span>Tech For Girls</span></h1>
       <form id="registrationForm">
         <!-- Basic Details -->
@@ -31,17 +31,20 @@
         <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required />
 
         <label for="email">Email ID</label>
-        <input type="email" id="email" name="email" placeholder="yourmail@example.com" required />
+        <input type="email" id="email" name="email" placeholder="your.mail@example.com" required />
 
         <label for="college">College / Department</label>
         <input type="text" id="college" name="college" placeholder="Enter your college name or department" required />
 
         <!-- WhatsApp Share Button & Counter -->
         <div class="share-section">
+          <div class="progress-bar-outer">
+            <div class="progress-bar-inner" id="shareProgressBar"></div>
+            <span id="shareCountLabel">0/5</span>
+          </div>
           <button type="button" id="whatsappShareBtn">
             🔗 Share on WhatsApp
           </button>
-          <p id="shareCounter">Click count: 0/5</p>
           <p id="shareMessage" class="hidden">Sharing complete. Please continue.</p>
         </div>
 

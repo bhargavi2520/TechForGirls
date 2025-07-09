@@ -5,6 +5,8 @@ const shareMessage = document.getElementById('shareMessage');
 const submitBtn = document.getElementById('submitBtn');
 const form = document.getElementById('registrationForm');
 const successMessage = document.getElementById('successMessage');
+const shareProgressBar = document.getElementById('shareProgressBar');
+const shareCountLabel = document.getElementById('shareCountLabel');
 
 let clickCount = 0;
 const maxClicks = 5;
@@ -17,6 +19,28 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+// ======== Helper Functions ========
+function disableForm() {
+  const inputs = form.querySelectorAll("input, button");
+  inputs.forEach(input => {
+    input.disabled = true;
+  });
+}
+
+function toBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+  });
+}
+
+function updateShareProgress() {
+  shareProgressBar.style.width = `${(clickCount / maxClicks) * 100}%`;
+  shareCountLabel.textContent = `${clickCount}/${maxClicks}`;
+}
+
 // ======== WhatsApp Share Button Logic ========
 whatsappBtn.addEventListener('click', () => {
   if (clickCount >= maxClicks) return;
@@ -26,11 +50,20 @@ whatsappBtn.addEventListener('click', () => {
   window.open(url, '_blank');
 
   clickCount++;
-  counterText.textContent = `Click count: ${clickCount}/${maxClicks}`;
+  updateShareProgress();
 
   if (clickCount === maxClicks) {
     shareMessage.classList.remove("hidden");
   }
+});
+
+// Initialize on load
+window.addEventListener('DOMContentLoaded', () => {
+  if (localStorage.getItem("techGirlsSubmitted") === "true") {
+    disableForm();
+    successMessage.classList.remove("hidden");
+  }
+  updateShareProgress();
 });
 
 // ======== Form Submission ========
@@ -88,20 +121,3 @@ form.addEventListener('submit', async (e) => {
     alert("Submission failed. Please check your internet connection or try again.");
   }
 });
-
-// ======== Helper Functions ========
-function disableForm() {
-  const inputs = form.querySelectorAll("input, button");
-  inputs.forEach(input => {
-    input.disabled = true;
-  });
-}
-
-function toBase64(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = error => reject(error);
-  });
-}

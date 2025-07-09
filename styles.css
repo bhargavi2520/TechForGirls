@@ -96,7 +96,7 @@ body {
   box-shadow: 0 12px 36px 0 rgba(162, 89, 255, 0.18), 0 2px 12px 0 rgba(244, 143, 177, 0.14);
 }
 
-.right-panel .subtitle {
+.left-panel .subtitle {
   font-size: 1rem;
   font-weight: 600;
   color: var(--text-color);
@@ -112,14 +112,14 @@ body {
   transition: color 0.3s;
 }
 
-.right-panel .subtitle .accent {
+.left-panel .subtitle .accent {
   color: var(--secondary-color);
   font-weight: 800;
   letter-spacing: 0.02em;
   text-shadow: 0 2px 8px #fbcfe8;
 }
 
-.right-panel .subtitle span:last-child {
+.left-panel .subtitle span:last-child {
   font-size: 1.3em;
   vertical-align: middle;
   margin-left: 0.2em;
@@ -217,6 +217,7 @@ body {
   font-weight: 700;
   margin-bottom: 0.5rem;
   color: var(--text-color); /* Deep purple heading */
+  margin:auto;
 }
 
 .right-panel h1 span {
@@ -283,9 +284,10 @@ input[type="file"]::file-selector-button:hover {
 .share-section {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;   /* Center children horizontally */
   gap: 0.5rem;
   margin-top: 0.5rem;
+  width: 100%;
 }
 
 #whatsappShareBtn {
@@ -523,38 +525,73 @@ a, .accent {
   50% { transform: scale(1.08);}
 }
 
-/* Subtitle styling for more beauty */
-.left-panel .subtitle {
-  font-size: 1.45rem;
-  font-weight: 700;
-  color: var(--primary-color-dark);
+/* --- Subtitle improvements --- */
+.right-panel .subtitle {
+  background: linear-gradient(90deg, #f3e8ff 0%, #fce7f3 100%);
+  border-radius: 18px;
+  box-shadow: 0 2px 12px 0 rgba(124,58,237,0.08);
+  padding: 1.1rem 1.7rem 1.1rem 1.7rem;
+  margin-bottom: 1.2rem;
+  margin-top: 0.5rem;
+  display: block;                /* Change from inline-block to block */
+  font-size: 1.18rem;
+  font-weight: 600;
+  color: var(--primary-color-dark, #7c3aed);
   letter-spacing: 0.01em;
   line-height: 1.5;
-  text-shadow: 0 2px 16px #e9d5ff, 0 1px 0 #fff;
-  background: rgba(255,255,255,0.92);
-  border-radius: 18px;
-  box-shadow: 0 4px 24px 0 rgba(124,58,237,0.10);
-  padding: 1.3rem 1.7rem 1.1rem 1.7rem;
-  margin-bottom: 1.7rem;
-  margin-top: 0.5rem;
-  display: inline-block;
-  z-index: 3;
+  text-shadow: 0 1px 6px #e9d5ff;
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
   position: relative;
-  max-width: 350px;
-  transition: box-shadow 0.3s, background 0.3s;
+  margin-left: auto;             /* Center horizontally */
+  margin-right: auto;            /* Center horizontally */
 }
 
-.left-panel .subtitle .accent {
-  color: var(--secondary-color);
-  font-weight: 800;
-  letter-spacing: 0.02em;
-  text-shadow: 0 2px 8px #fbcfe8;
+/* --- WhatsApp share section centering and progress bar --- */
+.share-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  width: 100%;
 }
 
-.left-panel .subtitle span:last-child {
-  font-size: 1.3em;
-  vertical-align: middle;
-  margin-left: 0.2em;
-  filter: drop-shadow(0 2px 8px #fbbf24aa);
+.progress-bar-outer {
+  width: 100%;
+  max-width: 400px;
+  height: 16px;
+  background: #fdc3ef;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.progress-bar-inner {
+  height: 100%;
+  background: #bb74ca;
+  border-radius: 12px;
+  transition: width 0.4s cubic-bezier(.4,2,.6,1);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0%;
+  z-index: 1;
+}
+
+#shareCountLabel {
+  margin-left: auto;
+  margin-right: 10px;
+  font-size: 0.98rem;
+  color: var(--text-color-light, #655a6b);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  z-index: 2;
+  background: transparent;
+  position: relative;
 }
 
